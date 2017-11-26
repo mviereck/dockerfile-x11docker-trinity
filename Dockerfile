@@ -10,12 +10,12 @@
 
 FROM debian:jessie
 
-RUN apt-get        update
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update
 RUN apt-get install -y apt-utils dbus-x11
 
 # OpenGL support
-RUN apt-get install -y libxv1 mesa-utils mesa-utils-extra libgl1-mesa-glx \
-                       libglu1-mesa libgl1-mesa-dri libdrm2 libgles2-mesa libegl1-mesa
+RUN apt-get install -y mesa-utils mesa-utils-extra libxv1
 
 # Language/locale settings
 ENV LANG=en_US.UTF-8
@@ -44,7 +44,7 @@ RUN apt-get install -y --no-install-recommends tde-core-trinity
 # create startscript 
 RUN echo '#! /bin/bash\n\
 [ -e "$HOME/.config" ] || cp -R /etc/skel/. $HOME/ \n\
-starttde \n\
+exec starttde \n\
 ' > /usr/local/bin/start 
 RUN chmod +x /usr/local/bin/start 
 
