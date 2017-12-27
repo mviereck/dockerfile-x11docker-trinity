@@ -1,6 +1,6 @@
 # x11docker/trinity
 
-Full Trinity desktop image on debian jessie. Trinity is the successor of KDE 3.
+Full Trinity desktop environment on debian jessie. Trinity is the successor of KDE 3.
  - Run Trinity desktop in docker.
  - Use x11docker to run image to run GUI applications and desktop environments in docker images.
  - Get [x11docker from github](https://github.com/mviereck/x11docker)
