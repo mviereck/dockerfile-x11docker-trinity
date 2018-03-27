@@ -57,13 +57,14 @@ RUN apt-get install -y gnupg && \
 # startscript to copy dotfiles from /etc/skel
 # runs either CMD or image command from docker run
 RUN echo '#! /bin/sh\n\
-[ -e "$HOME/.config" ] || cp -R /etc/skel/. $HOME/ \n\
+[ -n "$HOME" ] && [ ! -e "$HOME/.config" ] && cp -R /etc/skel/. $HOME/ \n\
 exec $* \n\
 ' > /usr/local/bin/start 
 RUN chmod +x /usr/local/bin/start 
 
 ENV PATH="/opt/trinity/bin:$PATH"
-ENTRYPOINT start
-CMD starttde
+
+ENTRYPOINT ["/usr/local/bin/start"]
+CMD ["starttde"]
 
 ENV DEBIAN_FRONTEND newt
