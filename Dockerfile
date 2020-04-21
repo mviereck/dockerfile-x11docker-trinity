@@ -54,7 +54,7 @@ deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-sb buster deps-
 " >/etc/apt/sources.list.d/trinity.list && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends wget && \
     wget http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-keyring.deb && \
-    dpkg -i trinity-keyring.deb && \
+    apt-get install -y ./trinity-keyring.deb && \
     apt-get update
 
 # Trinity desktop installation.
