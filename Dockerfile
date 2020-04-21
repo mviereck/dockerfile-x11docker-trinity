@@ -52,6 +52,7 @@ RUN echo " \n\
 deb http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-sb buster deps-r14 main-r14 \n\
 deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-sb buster deps-r14 main-r14 \n\
 " >/etc/apt/sources.list.d/trinity.list && \
+    env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends wget && \
     wget http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-keyring.deb && \
     dpkg -i trinity-keyring.deb && \
     apt-get update
