@@ -49,18 +49,15 @@ RUN echo $LANG UTF-8 > /etc/locale.gen && \
 
 # Trinity desktop sources list
 RUN echo " \n\
-deb http://mirror.ppa.trinitydesktop.org/trinity/trinity-r14.0.0/debian stretch main\n\
-deb-src http://mirror.ppa.trinitydesktop.org/trinity/trinity-r14.0.0/debian stretch main\n\
-deb http://mirror.ppa.trinitydesktop.org/trinity/trinity-builddeps-r14.0.0/debian stretch main\n\
-deb-src http://mirror.ppa.trinitydesktop.org/trinity/trinity-builddeps-r14.0.0/debian stretch main \n\
-" >/etc/apt/sources.list.d/trinity.list
+deb http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-sb buster deps-r14 main-r14 \n\
+deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-sb buster deps-r14 main-r14 \n\
+" >/etc/apt/sources.list.d/trinity.list && \
+    wget http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-keyring.deb && \
+    dpkg -i trinity-keyring.deb && \
+    apt-get update
 
-# Trinity desktop installation. Remove tde-trinity to get tde-core-trinity only
-RUN env DEBIAN_FRONTEND=noninteractive apt-get install -y gnupg && \
-    env DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver keyserver.quickbuild.io --recv-keys F5CFC95C && \
-    apt-get update && \
-    env DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      tde-trinity
+# Trinity desktop installation.
+RUN env DEBIAN_FRONTEND=noninteractive apt-get install -y tde-trinity
 
 ENV PATH="/opt/trinity/bin:$PATH"
 
