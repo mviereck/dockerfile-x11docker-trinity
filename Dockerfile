@@ -21,7 +21,7 @@
 #
 # See x11docker --help for further options.
 
-FROM debian:buster
+FROM debian:bullseye
  
 RUN apt-get update && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -49,8 +49,10 @@ RUN echo $LANG UTF-8 > /etc/locale.gen && \
 
 # Trinity desktop sources list
 RUN echo " \n\
-deb http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-sb buster deps-r14 main-r14 \n\
-deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-sb buster deps-r14 main-r14 \n\
+deb http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.0.x bullseye main \n\
+deb http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-builddeps-r14.0.x bullseye main \n\
+deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.0.x bullseye main \n\
+deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-builddeps-r14.0.x bullseye main \n\
 " >/etc/apt/sources.list.d/trinity.list && \
     env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends wget && \
     wget http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-keyring.deb && \
